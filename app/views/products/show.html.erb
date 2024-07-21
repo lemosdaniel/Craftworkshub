@@ -1,0 +1,59 @@
+<div class="page-header d-flex justify-content-between">
+  <%= link_to products_path, class: 'btn' do %>
+    <i class="bi bi-arrow-left pc"> Back</i> 
+  <% end %>
+  <% if current_user&.seller? %>
+    <%= link_to edit_product_path(@product), class: 'btn btn-p' do %>
+      <i class="bi bi-pencil-square"> Edit</i>
+    <% end %>
+  <% end %>
+</div>
+<div class="d-flex justify-content-center">
+  <div class="card mt-2 w-100">
+  <div class="d-flex">
+    <div>
+    <% if @product.image.attached? %>
+      <%= image_tag @product.image, class: 'card-img-top img-fluid', alt: 'Product image', style: 'object-fit: contain; width: 400px !important' %>
+    <% else %>
+      <%= image_tag 'default_image.jpg', class: 'card-img-top img-fluid', alt: 'Default product image', style: 'object-fit: contain; width: 400px !important' %>
+    <% end %>
+    </div>
+    <div class="mx-3">
+      <h1 class="card-title pc"><%= @product.title %></h1>
+      <p class="card-text text-muted"><%= @product.description %></p>
+      <h1 class="price"><%= number_to_currency(@product.price, precision: 2) %></h1>
+      <% if current_user&.buyer? %>
+         <%= link_to cart_cart_items_path(cart_id: @cart.id, product_id: @product.id), method: :post, class: "btn btn-p" do %>
+            <i class="bi bi-cart-plus-fill"> Add</i>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-body">
+    <h3 class="sc">Reviews</h3>
+    <% if @product.reviews.present? %>
+      <% @product.reviews.each do |review| %>
+        <div class="mb-3 border rounded d-inline-block px-3">
+          <div class="d-flex justify-content-start align-items-center">
+            <div>
+              <% full_s, empty_s = star_rating(review.rating) %>
+              <p class="mb-1"><span class="fs-5"><%= full_s %></span><span class="fs-4 fw-normal mt-2 d-inline-block"><%= empty_s %></span></p>
+            </div>
+            <div class="mx-4 mt-1">
+              <small class="text-muted"><%= review.created_at.strftime("%b %d, %Y") %></small>
+            </div>
+          </div>
+          <p class="mb-1"><%= review.comment %></p>
+          <footer class="blockquote-footer mt-2">
+            by <%= User.find(review.user_id).name %> <!-- Assuming you have a User model with a name attribute -->
+          </footer>
+        </div>
+        <hr>
+      <% end %>
+    <% else %>
+      <p>No reviews yet!</p>
+    <% end %>
+  </div>
+</div>
+
+</div>

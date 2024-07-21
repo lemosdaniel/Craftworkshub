@@ -1,0 +1,39 @@
+<h1 class="pc">Shopping Cart</h1>
+<% if @cart.cart_items.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart.cart_items.each do |item| %>
+        <tr>
+          <td><%= item.product.title %></td>
+          <td><%= number_to_currency(item.product.price) %></td>
+          <td>
+            <%= form_with(model: item, url: cart_cart_item_path(item.cart, item), local: true, method: :put) do |f| %>
+              <div class="d-flex justify-content-center align-items-center">
+                <%= f.number_field :quantity, min: 1, class: "form-control mx-2" %>
+                <%= f.submit "Update Quantity", class: "btn btn-p" %>
+              </div>
+            <% end %>
+
+          </td>
+          <td>
+            <%= link_to cart_cart_item_path(@cart, item), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } do %>
+              <i class="bi bi-trash"> Remove</i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <h3 class="pc">Total: <%= number_to_currency(@cart.total_price) %></h3>
+  <%= link_to 'Proceed to Checkout', '', class: 'btn btn-success mt-3' %>
+<% else %>
+  <p>Your cart is empty</p>
+<% end %>
