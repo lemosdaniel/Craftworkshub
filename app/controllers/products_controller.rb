@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @categories = Product.pluck(:category).uniq
+    @categories = Product.pluck(:category).compact.uniq
     if params[:category].present?
       @products = Product.where(category: params[:category])
     else

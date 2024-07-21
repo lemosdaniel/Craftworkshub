@@ -35,5 +35,9 @@
   <h3 class="pc">Total: <%= number_to_currency(@cart.total_price) %></h3>
   <%= link_to 'Proceed to Checkout', '', class: 'btn btn-success mt-3' %>
 <% else %>
-  <p>Your cart is empty</p>
+  <div class="text-center mt-5">
+    <h2 class="display-4">Your cart is empty :(</h2>
+    <p>Explore our products and add them to your cart!</p>
+    <%= link_to 'Browse Products', products_path, class: 'btn btn-p btn-lg' %>
+  </div>
 <% end %>
