@@ -1,27 +1,2 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # Craftworkshub
-# Craftworkshub
-# Craftworkshub
+The project "CraftWorks Hub" designed and developed by Daniel Lemos, is an e-commerce web platform designed to facilitate the buying and selling of handicrafts. Its main objective is to provide a common platform for both sellers and buyers, offering features such as user registration, login, product listings, shopping carts, payments, order history, product reviews, and ratings.
