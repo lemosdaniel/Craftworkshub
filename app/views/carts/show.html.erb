@@ -33,7 +33,7 @@
     </tbody>
   </table>
   <h3 class="pc">Total: <%= number_to_currency(@cart.total_price) %></h3>
-  <%= link_to 'Proceed to Checkout', '', class: 'btn btn-success mt-3' %>
+  <%= button_to 'Proceed to Payment', checkout_path, method: :post, class: 'btn btn-success mt-3', form: { id: 'checkout-form' } %>
 <% else %>
   <div class="text-center mt-5">
     <h2 class="display-4">Your cart is empty :(</h2>
@@ -41,3 +41,28 @@
     <%= link_to 'Browse Products', products_path, class: 'btn btn-p btn-lg' %>
   </div>
 <% end %>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  document.addEventListener("turbolinks:load", function() {
+    var stripe = Stripe('<%= Rails.application.credentials.dig(:stripe, :publishable_key) %>');
+    var checkoutButton = document.getElementById('checkout-form');
+    checkoutButton.addEventListener('submit', function(e) {
+      fetch('<%= checkout_path %>', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+      }).then(function(response) {
+        return response.json();
+      }).then(function(session) {
+        return stripe.redirectToCheckout({ sessionId: session.id });
+      }).then(function(result) {
+        if (result.error) {
+          alert(result.error.message);
+        }
+      }).catch(function(error) {
+        console.error('Error')}
+    }
+  }
+</script>

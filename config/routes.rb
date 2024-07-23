@@ -34,5 +34,9 @@ end
   # Alternatively, you can use this for a single user's cart
   resource :cart, only: [:show]
   resources :orders, only: [:index, :show, :create]
+  resource :checkout, only: [:show, :create]
+  get 'checkout/success', to: 'checkouts#success'
+  get 'checkout/cancel', to: 'checkouts#cancel'
+  
   root 'products#index'
 end

@@ -8,7 +8,9 @@
 <nav class="navbar navbar-expand-md navbar-light bg-l">
   <div class="container mx-auto">
     <%= link_to "#{Rails.configuration.application_name}", root_path, class: "navbar-brand" %>
-
+    <% if current_user&.seller? %>
+      <span class="d-block bg-light pc rounded px-1"> Seller Store</span>
+    <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
