@@ -30,6 +30,20 @@ class CheckoutsController < ApplicationController
   end
 
   def success
+    @cart = current_user.cart
+    order = Order.create(user: current_user, total_price: @cart.total_price)
+
+    @cart.cart_items.each do |cart_item|
+      OrderItem.create(
+        order: order,
+        product: cart_item.product,
+        quantity: cart_item.quantity,
+        price: cart_item.product.price
+      )
+    end
+
+    @cart.cart_items.destroy_all # Empty the cart
+    redirect_to order_path(order), notice: 'Your order has been placed successfully.'
   end
 
   def cancel

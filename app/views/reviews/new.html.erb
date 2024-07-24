@@ -1,0 +1,16 @@
+<h1 class="bg-l text-center p-3 rounded">Add Review for <%= @product.title %></h1>
+<div class="container mt-4">
+  <%= form_with(model: [@product, @review], local: true) do |form| %>
+    <div class="mb-3">
+      <%= form.label :rating, class: 'form-label pc' %>
+      <%= form.number_field :rating, class: 'form-control', min: 1, max: 5 %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :comment, class: 'form-label pc' %>
+      <%= form.text_area :comment, class: 'form-control' %>
+    </div>
+
+    <%= form.submit 'Submit Review', class: 'btn btn-p' %>
+  <% end %>
+</div>

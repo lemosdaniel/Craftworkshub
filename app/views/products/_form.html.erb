@@ -51,7 +51,7 @@
     <% end %>
 
     <button type="submit" class="btn btn-p">
-      <i class="bi bi-check-circle-fill"></i> Update
+      <i class="bi bi-check-circle-fill"></i> <%= product.persisted? ? "Update" : "Create"%>
     </button>
 
 

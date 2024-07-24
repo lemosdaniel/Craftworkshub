@@ -1,0 +1,25 @@
+<h1 class="pc text-center p-3 rounded">My Orders</h1>
+<div class="container mt-4">
+  <table class="table table-striped">
+    <thead class="bg-l text-white">
+      <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Total Amount</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td class="pc"><%= order.id %></td>
+          <td class="pc"><%= order.created_at.strftime("%B %d, %Y") %></td>
+          <td class="price"><%= number_to_currency(order.total_price) %></td>
+          <td>
+            <%= link_to 'View Details', order_path(order), class: 'btn btn-p' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

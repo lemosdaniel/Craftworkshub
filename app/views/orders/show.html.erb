@@ -1,0 +1,36 @@
+<h1 class="pc text-center p-3 rounded">Order Details</h1>
+<div class="container mt-4">
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <p class="pc"><strong>Order ID:</strong> <%= @order.id %></p>
+    </div>
+    <div class="col-md-6 text-end">
+      <p class="pc"><strong>Total Amount:</strong> <%= number_to_currency(@order.total_price) %></p>
+    </div>
+  </div>
+  <h2 class="sc mb-3">Items</h2>
+  <table class="table table-striped">
+    <thead class="bg-l text-white">
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Total</th>
+        <th scope="col">Review</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_items.each do |item| %>
+        <tr>
+          <td class="pc"><%= item.product.title %></td>
+          <td class="pc"><%= item.quantity %></td>
+          <td class="price"><%= number_to_currency(item.price) %></td>
+          <td class="price"><%= number_to_currency(item.price * item.quantity) %></td>
+          <td>
+            <%= link_to 'Add Review', new_product_review_path(item.product), class: 'btn btn-p' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

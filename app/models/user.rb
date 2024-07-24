@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :products
   has_one :cart
   has_many :orders
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   enum user_type: { buyer: 0, seller: 1 }
 

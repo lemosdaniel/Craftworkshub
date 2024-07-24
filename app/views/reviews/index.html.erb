@@ -1,0 +1,42 @@
+<h1 class="pc text-center p-3 rounded">My Reviews</h1>
+<div class="container mt-4">
+  <% if @reviews.present? %>
+    <% @reviews.each do |review| %>
+      <div class="card mb-4">
+        <div class="d-flex">
+          <div>
+            <% if review.product.image.attached? %>
+              <%= image_tag review.product.image, class: 'card-img-top img-fluid', alt: 'Product image', style: 'object-fit: contain; width: 400px !important' %>
+            <% else %>
+              <%= image_tag 'default_image.jpg', class: 'card-img-top img-fluid', alt: 'Default product image', style: 'object-fit: contain; width: 400px !important' %>
+            <% end %>
+          </div>
+          <div class="mx-3">
+            <h1 class="card-title pc"><%= review.product.title %></h1>
+            <p class="card-text text-muted"><%= review.product.description %></p>
+            <h1 class="price"><%= number_to_currency(review.product.price, precision: 2) %></h1>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="mb-3 border rounded d-inline-block px-3">
+            <div class="d-flex justify-content-start align-items-center">
+              <div>
+                <% full_s, empty_s = star_rating(review.rating) %>
+                <p class="mb-1"><span class="fs-5"><%= full_s %></span><span class="fs-4 fw-normal mt-2 d-inline-block"><%= empty_s %></span></p>
+              </div>
+              <div class="mx-4 mt-1">
+                <small class="text-muted"><%= review.created_at.strftime("%b %d, %Y") %></small>
+              </div>
+            </div>
+            <p class="mb-1"><%= review.comment %></p>
+            <footer class="blockquote-footer mt-2">
+              by <%= current_user.name %> <!-- Assuming you have a User model with a name attribute -->
+            </footer>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-center">You haven't written any reviews yet!</p>
+  <% end %>
+</div>

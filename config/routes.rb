@@ -23,8 +23,9 @@ end
   # Defines the root path route ("/")
   # root "articles#index"
   resources :products do
-    resources :reviews, only: [:create, :update, :destroy]
+    resources :reviews, only: [:new, :create, :update, :destroy]
   end
+  resources :reviews, only: :index
   resources :carts, only: [:show] do
     resources :cart_items, only: [:create, :update, :destroy]
   end
