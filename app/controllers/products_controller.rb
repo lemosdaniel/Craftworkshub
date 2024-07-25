@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
     if params[:category].present?
       @products = Product.where(category: params[:category])
     else
-      @products = current_user.seller? ? current_user.products : Product.all
+      @products = current_user&.seller? ? current_user.products : Product.all
     end
   end
 
