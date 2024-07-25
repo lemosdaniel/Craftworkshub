@@ -55,7 +55,7 @@
 
           <li class="nav-item dropdown d-flex">
             <%= link_to "#", id: "navbar-dropdown", class: "nav-link dropdown-toggle d-flex justify-content-center align-items-center", data: { target: "nav-account-dropdown", bs_toggle: "dropdown" }, aria: { haspopup: true, expanded: false } do %>
-              <%= image_tag avatar_path(current_user), size: "30x30", class: "rounded-circle shadow-sm d-block mx-auto" %>
+              <%= image_tag avatar_path(current_user), size: "30x30", class: "rounded-circle shadow-sm d-block mx-auto" if current_user.avatar.present? %>
             <% end %>
             <div id="nav-account-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown">
               <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item text-black" %>
