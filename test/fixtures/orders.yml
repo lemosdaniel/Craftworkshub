@@ -1,9 +1,14 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/orders.yml
+order_one:
+  total_price: 100
+  user: buyer
 
-one:
-  user: one
-  total_price: 9.99
+# test/fixtures/products.yml
+product_one:
+  name: Sample Product
+  price: 50
+  user: seller
 
-two:
-  user: two
-  total_price: 9.99
+# test/fixtures/carts.yml
+cart_one:
+  user: buyer

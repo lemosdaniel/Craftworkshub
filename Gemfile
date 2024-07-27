@@ -89,3 +89,5 @@ gem "whenever", require: false
 gem "responders", github: "heartcombo/responders", branch: "main"
 gem 'stripe'
 gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
+gem 'factory_bot_rails'
+gem 'rails-controller-testing'

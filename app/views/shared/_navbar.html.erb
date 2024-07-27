@@ -20,10 +20,10 @@
         <li class="nav-item">
           <%= link_to "Products", products_path, class: "nav-link" %>
         </li>
-         <% if current_user&.buyer? %>
         <li class="nav-item">
-          <%= link_to "Orders", orders_path, class: "nav-link" %>
+          <%= link_to "#{current_user&.buyer? ? "Orders": "My Sales"}", orders_path, class: "nav-link" %>
         </li>
+        <% if current_user&.buyer? %>
          <li class="nav-item">
           <%= link_to "Reviews", reviews_path, class: "nav-link" %>
         </li>
@@ -35,7 +35,7 @@
         <% if user_signed_in? %>
 
           <li class="nav-item mx-1">
-            <%= link_to notifications_path, class: "nav-link" do %>
+            <%= link_to notifications_path, class: "nav-link #{unread_notification(current_user)}" do %>
               <span><i class="fa fa-bell fs-5 mt-1" aria-hidden="true"></i></span>
             <% end %>
           </li>

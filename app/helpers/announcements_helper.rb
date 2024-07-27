@@ -9,6 +9,16 @@ module AnnouncementsHelper
     end
   end
 
+  def unread_notification(user)
+    notification = user.notifications.includes(:event).last
+    return if notification.nil?
+
+    # Highlight announcements for anyone not logged in, cuz tempting
+    if notification.nil? || notification.read_at.nil?
+      "unread-announcements"
+    end
+  end
+
   def announcement_class(type)
     {
       "new" => "text-success",

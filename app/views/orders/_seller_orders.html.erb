@@ -1,0 +1,27 @@
+<div class="container mt-4">
+    <h1 class="pc text-center p-3 rounded">My Sales</h1>
+    <table class="table table-striped">
+  <thead class="bg-l">
+    <tr>
+      <th scope="col" class="sc">Order ID</th>
+      <th scope="col" class="sc">Product Name</th>
+      <th scope="col" class="sc">Customer Name</th>
+      <th scope="col" class="sc">Quantity</th>
+      <th scope="col" class="sc">Price</th>
+      <th scope="col" class="sc">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders_items.each do |order_item| %>
+      <tr>
+        <td class="pc"><%= order_item.order.id %></td>
+        <td class="pc"><%= order_item.product.title %></td>
+        <td class="pc"><%= order_item.order.user.name %></td>
+        <td class="pc"><%= order_item.quantity %></td>
+        <td class="price"><%= number_to_currency(order_item.price) %></td>
+        <td class="price"><%= number_to_currency(order_item.quantity * order_item.price) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  </div>

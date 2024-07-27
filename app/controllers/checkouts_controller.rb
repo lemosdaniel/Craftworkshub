@@ -1,4 +1,6 @@
 class CheckoutsController < ApplicationController
+
+  include ApplicationHelper
   def show
     @cart = current_user.cart
   end
@@ -40,6 +42,11 @@ class CheckoutsController < ApplicationController
         quantity: cart_item.quantity,
         price: cart_item.product.price
       )
+
+      product_title = cart_item.product.title
+      user_name = current_user.name
+      message = "🎉 #{user_name} has placed an order for your product '#{product_title}' with a quantity of #{cart_item.quantity}."
+      create_event_and_notification(cart_item.product.user, message)
     end
 
     @cart.cart_items.destroy_all # Empty the cart

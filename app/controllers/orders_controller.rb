@@ -2,7 +2,11 @@ class OrdersController < ApplicationController
   before_action :set_cart
 
   def index
-    @orders = current_user.orders
+    if current_user.buyer?
+      @orders = current_user.orders
+    elsif current_user.seller?
+      @orders_items = OrderItem.joins(:product).where(product: {user_id: current_user.id})
+    end    
   end
 
   def new

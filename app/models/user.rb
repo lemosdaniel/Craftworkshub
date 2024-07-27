@@ -10,9 +10,9 @@ class User < ApplicationRecord
   has_many :notification_mentions, as: :record, dependent: :destroy, class_name: "Noticed::Event"
   has_many :services
 
-  has_many :products
-  has_one :cart
-  has_many :orders
+  has_many :products, dependent: :destroy
+  has_one :cart, dependent: :destroy
+  has_many :orders, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
   enum user_type: { buyer: 0, seller: 1 }
